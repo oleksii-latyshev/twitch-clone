@@ -1,5 +1,6 @@
 'use client';
 
+import { FollowingSkeleton } from '@/app/(browse)/_components/sidebar/following';
 import { RecommendedSkeleton } from '@/app/(browse)/_components/sidebar/recommended';
 import { ToggleSkeleton } from '@/app/(browse)/_components/sidebar/toggle';
 import { cn } from '@/lib/utils';
@@ -23,6 +24,7 @@ export const Wrapper: FC<WrapperProps> = ({ children }) => {
         }
       >
         <ToggleSkeleton />
+        <FollowingSkeleton />
         <RecommendedSkeleton />
       </aside>
     );
