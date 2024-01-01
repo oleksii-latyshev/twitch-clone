@@ -1,4 +1,5 @@
 import { Actions } from '@/app/(browse)/[username]/_components/actions';
+import { isBlockedByUser } from '@/lib/block-service';
 import { isFollowingUser } from '@/lib/follow-service';
 import { getUserByUsername } from '@/lib/user-service';
 import { notFound } from 'next/navigation';
@@ -18,6 +19,11 @@ const Page: FC<PageProps> = async ({ params }) => {
   }
 
   const isFollowing = await isFollowingUser(user.id);
+  const isBlocked = await isBlockedByUser(user.id);
+
+  if (isBlocked) {
+    return notFound();
+  }
 
   return (
     <div className='flex flex-col gap-y-4'>
