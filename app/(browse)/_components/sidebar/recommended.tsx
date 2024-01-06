@@ -2,11 +2,13 @@
 
 import { UserItem, UserItemSkeleton } from '@/app/(browse)/_components/sidebar/user-item';
 import { useSidebar } from '@/store/use-sidebar';
-import { User } from '@prisma/client';
+import { Stream, User } from '@prisma/client';
 import { FC } from 'react';
 
 type RecommendedProps = {
-  data: User[];
+  data: (User & {
+    stream: Stream | null;
+  })[];
 };
 
 export const Recommended: FC<RecommendedProps> = ({ data }) => {
@@ -27,7 +29,7 @@ export const Recommended: FC<RecommendedProps> = ({ data }) => {
             key={user.id}
             username={user.username}
             imageUrl={user.imageUrl}
-            isLive={true}
+            isLive={user.stream?.isLive}
           />
         ))}
       </ul>
