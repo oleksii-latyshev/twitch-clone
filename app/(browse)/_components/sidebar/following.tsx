@@ -2,14 +2,14 @@
 
 import { UserItem, UserItemSkeleton } from '@/app/(browse)/_components/sidebar/user-item';
 import { useSidebar } from '@/store/use-sidebar';
-import { Follow, Stream, User } from '@prisma/client';
+import { Follow, User } from '@prisma/client';
 import exp from 'constants';
 import { FC } from 'react';
 
 type FollowingProps = {
   data: (Follow & {
     following: User & {
-      stream: Stream | null;
+      stream: { isLive: boolean } | null;
     };
   })[];
 };
