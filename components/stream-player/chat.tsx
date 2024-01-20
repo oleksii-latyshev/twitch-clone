@@ -1,8 +1,9 @@
 'use client';
 
-import { ChatForm } from '@/components/stream-player/chat-form';
-import { ChatHeader } from '@/components/stream-player/chat-header';
-import { ChatList } from '@/components/stream-player/chat-list';
+import { ChatCommunity } from '@/components/stream-player/chat-community';
+import { ChatForm, ChatFormSkeleton } from '@/components/stream-player/chat-form';
+import { ChatHeader, ChatHeaderSkeleton } from '@/components/stream-player/chat-header';
+import { ChatList, ChatListSkeleton } from '@/components/stream-player/chat-list';
 import { ChatVariant, useChatSidebar } from '@/store/use-chat-sidebar';
 import { useChat, useConnectionState, useRemoteParticipant } from '@livekit/components-react';
 import { ConnectionState } from 'livekit-client';
@@ -79,10 +80,18 @@ export const Chat: FC<ChatProps> = ({
         </>
       )}
       {variant === ChatVariant.COMMUNITY && (
-        <>
-          <p>Community</p>
-        </>
+        <ChatCommunity viewerName={viewerName} hostName={hostName} isHidden={isHidden} />
       )}
+    </div>
+  );
+};
+
+export const ChatSkeleton = () => {
+  return (
+    <div className='flex flex-col border-l border-b pt-0 h-[calc(100vh-80px)] border-2'>
+      <ChatHeaderSkeleton />
+      <ChatListSkeleton />
+      <ChatFormSkeleton />
     </div>
   );
 };

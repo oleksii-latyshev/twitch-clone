@@ -10,6 +10,7 @@ import {
 import { OfflineVideo } from '@/components/stream-player/offline-video';
 import { LoadingVideo } from '@/components/stream-player/loading-video';
 import { LiveVideo } from '@/components/stream-player/live-video';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type VideoProps = {
   hostName: string;
@@ -34,4 +35,12 @@ export const Video: FC<VideoProps> = ({ hostName, hostIdentity }) => {
   }
 
   return <div className='aspect-video border-b group relative'>{content}</div>;
+};
+
+export const VideoSkeleton = () => {
+  return (
+    <div className='aspect-video border-x border-background'>
+      <Skeleton className='h-full w-full rounded-none' />
+    </div>
+  );
 };
