@@ -1,4 +1,5 @@
 import { Actions } from '@/app/(browse)/[username]/_components/actions';
+import { StreamPlayer } from '@/components/stream-player';
 import { isBlockedByUser } from '@/lib/block-service';
 import { isFollowingUser } from '@/lib/follow-service';
 import { getUserByUsername } from '@/lib/user-service';
@@ -14,7 +15,7 @@ type PageProps = {
 const Page: FC<PageProps> = async ({ params }) => {
   const user = await getUserByUsername(params.username);
 
-  if (!user) {
+  if (!user || !user.stream) {
     notFound();
   }
 
@@ -22,16 +23,10 @@ const Page: FC<PageProps> = async ({ params }) => {
   const isBlocked = await isBlockedByUser(user.id);
 
   if (isBlocked) {
-    return notFound();
+    notFound();
   }
 
-  return (
-    <div className='flex flex-col gap-y-4'>
-      <p>username: {user.username}</p>
-      <p>is following: {`${isFollowing}`}</p>
-      <Actions userId={user.id} isFollowing={isFollowing} />
-    </div>
-  );
+  return <StreamPlayer user={user} stream={user.stream} isFollowing={isFollowing} />;
 };
 
 export default Page;
