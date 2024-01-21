@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { Chat, ChatSkeleton } from '@/components/stream-player/chat';
 import { ChatToggle } from '@/components/stream-player/chat-toggle';
 import { Header, HeaderSkeleton } from '@/components/stream-player/header';
+import { InfoCard } from '@/components/stream-player/info-card';
 
 type StreamPlayerProps = {
   user: User & { stream: Stream | null };
@@ -50,6 +51,12 @@ export const StreamPlayer: FC<StreamPlayerProps> = ({ user, stream, isFollowing 
             imageUrl={user.imageUrl}
             isFollowing={isFollowing}
             name={stream.name}
+          />
+          <InfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            name={stream.name}
+            thumbnailUrl={stream.thumnailUrl}
           />
         </div>
         <div className={cn('col-span-1', collapsed && 'hidden')}>
