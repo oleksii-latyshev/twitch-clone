@@ -40,7 +40,7 @@ export const Actions: FC<ActionsProps> = ({ isFollowing, userId }) => {
   const handleBlock = () => {
     startTransition(() => {
       onBlock(userId)
-        .then((data) => toast.success(`Blocked the user ${data.blocked.username}`))
+        .then((data) => toast.success(`Blocked the user ${data?.blocked.username}`))
         .catch(() => toast.error('Something went wrong'));
     });
   };
